@@ -57,13 +57,13 @@ mixin _$TodosStore on _TodosStore, Store {
   final _$addedTodoListAtom = Atom(name: '_TodosStore.addedTodoList');
 
   @override
-  ObserverList<Todos> get addedTodoList {
+  ObservableList<Todos> get addedTodoList {
     _$addedTodoListAtom.reportRead();
     return super.addedTodoList;
   }
 
   @override
-  set addedTodoList(ObserverList<Todos> value) {
+  set addedTodoList(ObservableList<Todos> value) {
     _$addedTodoListAtom.reportWrite(value, super.addedTodoList, () {
       super.addedTodoList = value;
     });
@@ -90,11 +90,11 @@ mixin _$TodosStore on _TodosStore, Store {
   }
 
   @override
-  void removeFromTodoList(int id) {
+  void removeFromTodoList(Todos todo) {
     final _$actionInfo = _$_TodosStoreActionController.startAction(
         name: '_TodosStore.removeFromTodoList');
     try {
-      return super.removeFromTodoList(id);
+      return super.removeFromTodoList(todo);
     } finally {
       _$_TodosStoreActionController.endAction(_$actionInfo);
     }

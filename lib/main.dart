@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/TODOS/screen/todos.dart';
 import 'package:todos/TODOS/store/todos_store.dart';
+import 'package:todos/catagory/store/category_store.dart';
+
+import 'catagory/screen/catagory_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,13 +19,14 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(create: (_) => TodosStore()),
+        Provider(create: (_) => CategoryStore())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const TodosScreen(),
+        home: const CatagoryScreen(),
       ),
     );
   }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todos/TODOS/screen/widget/todo_widget.dart';
 import 'package:todos/TODOS/store/todos_store.dart';
+import 'todos.dart';
+
+import '../entity/model.dart';
 
 class AddedToDoList extends StatefulWidget {
   const AddedToDoList({ Key? key }) : super(key: key);
@@ -23,48 +27,20 @@ class _AddedToDoListState extends State<AddedToDoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Added ToDo List')),
-      
+      body: createBody(todosStore.addedTodoList)
     );
   }
 
-  _todoList(){
-    print(todosStore.addedTodoList.length);
-
-    if(todosStore.addedTodoList.isNotEmpty){
-      return ListView.builder(
+  Widget createBody(List<Todos> addedTodos) {
+    return ListView.builder(
         shrinkWrap: true,
-        itemCount: todosStore.addedTodoList.length,
+        itemCount: addedTodos.length,
         itemBuilder: (context, index) {
-          return todoItemWidget(
-              id: todosStore.addedTodoList[index].id.toString() as 
+          return TodoListTile(
+              todo: addedTodos[index]); // need to see
         });
-    }
-     
   }
 
-  Widget todoItemWidget(
-      {required String id,
-      required String title,
-      required bool completed,
-      required int index}) {
-    return ListTile(
-      leading: Text(id),
-      title: Text(title),
-      trailing: Checkbox(
-        value: completed,
-        onChanged: (bool? value) {
-          setState(() {
-            completed = !completed;
-            print("this is $value");
-          });
-          if (completed) {
-            todosStore.addToNewList(index);
-            print(todosStore.addedTodoList.length);
-          }else{
-            todosStore.removeFromTodoList(index);
-          }
-        },
-      ),
-    );
-  }
+  
+ 
 }

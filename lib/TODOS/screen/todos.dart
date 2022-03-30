@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:todos/TODOS/screen/widget/todo_widget.dart';
 import 'package:todos/TODOS/store/todos_store.dart';
 import 'package:provider/provider.dart';
 
@@ -57,38 +58,9 @@ class _TodosScreenState extends State<TodosScreen> {
         shrinkWrap: true,
         itemCount: todos.length,
         itemBuilder: (context, index) {
-          return todoItemWidget(
-              id: todos[index].id.toString(),
-              title: todos[index].title,
-              completed: false,
-              index: todos[index].id); // need to see
+          return TodoListTile(
+              todo: todos[index]); // need to see
         });
-  }
-
-  Widget todoItemWidget(
-      {required String id,
-      required String title,
-      required bool completed,
-      required int index}) {
-    return ListTile(
-      leading: Text(id),
-      title: Text(title),
-      trailing: Checkbox(
-        value: completed,
-        onChanged: (bool? value) {
-          setState(() {
-            completed = !completed;
-            print("this is $value");
-          });
-          if (completed) {
-            todosStore.addToNewList(index);
-            print(todosStore.addedTodoList.length);
-          }else{
-            todosStore.removeFromTodoList(index);
-          }
-        },
-      ),
-    );
   }
 
   Widget floatingActionButton() {

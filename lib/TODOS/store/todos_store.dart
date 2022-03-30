@@ -1,6 +1,3 @@
-//mobx.dart
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:todos/TODOS/entity/model.dart';
 import 'package:todos/TODOS/repository.dart';
@@ -23,7 +20,7 @@ abstract class _TodosStore with Store{
   UserResponse userResponse = UserResponse();
 
   @observable
-  ObserverList<Todos> addedTodoList = ObserverList();
+  ObservableList<Todos> addedTodoList = <Todos>[].asObservable();
 
   @action
   void addToNewList(Todos todos){
@@ -31,11 +28,9 @@ abstract class _TodosStore with Store{
   }
 
   @action
-  void removeFromTodoList(int id){
-    addedTodoList.remove
-    ((element) => element.id = id);
+  void removeFromTodoList(Todos todo){
+    addedTodoList.remove(todo);
   }
-
 
   @action
   Future<UserResponse> getData() async{

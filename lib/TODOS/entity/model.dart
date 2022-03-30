@@ -5,13 +5,13 @@ part 'model.g.dart';
 @JsonSerializable()
 class Todos {
   Todos(
-      {required this.userId,
+      {
       required this.id, 
       required this.title,
       required this.completed});
 
-  @JsonKey(name: 'userId')
-  int userId;
+  // @JsonKey(name: 'userId')
+  // int userId;
 
   @JsonKey(name: 'id')
   int id;
